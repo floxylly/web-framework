@@ -13,7 +13,8 @@ class MovieSeeder extends Seeder
     public function run(): void
     {
         Movie::factory(10)->create();
-        $this->call(GenresSeeder::class);
-        $this->call(MoviesSeeder::class);
+        $this->call(GenreSeeder::class);
+        $this->call(MovieSeeder::class);
     }
 }
+
