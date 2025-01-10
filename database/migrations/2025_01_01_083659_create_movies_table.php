@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('movies', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('synopsis');
-            $table->string('poster')->nullable;
-            $table->integer('year');
+            $table->string('title', 255);
+            $table->text('synopsis')->nullable();
+            $table->string('poster', 355)->nullable();
+            $table->date('year')->nullable()->change();
             $table->boolean('available')->default(true);
-            $table->foreignId('genre_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->uuid('genre_id'); 
             $table->timestamps();
         });
     }
