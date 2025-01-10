@@ -20,9 +20,10 @@ class MovieFactory extends Factory
             'title' => $this->faker->sentence(),
             'synopsis' => $this->faker->text(),
             'poster' => $this->faker->imageUrl(),
-            'stock' => $this->faker->randomNumber(1, 8),
-            'available' => true,
+            'year' => $this->faker->year(),
+            'available' => $this->faker->boolean(),
             'genre_id' => $this->faker->numberBetween(1, 2),
         ];
     }
 }
+
