@@ -2,27 +2,32 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
-class genreSeeder extends Seeder
+class GenreSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
+    
     public function run(): void
     {
         DB::table('genre')->insert([
             [
-                'name' => 'Komedi',
+                'name' => 'Horor',
                 'created_at' => now(),
 
             ],
             [
-                'name' => 'Horor',
+                'name' => 'Komedi',
                 'created_at' => now(),
             ]
         ]);
-        $this->call(genreSeeder::class);
+        $this->call([
+            GenreSeeder::class,
+           
+        ]);
     }
 }
+
