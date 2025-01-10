@@ -8,21 +8,22 @@ use Illuminate\Database\Eloquent\Model;
 class Movie extends Model
 {
     use HasFactory;
-    public function reviews()
-    {
-        return $this->hasMany(Review::class);
-    }
-    protected $table = 'movie';
+    protected $table = 'movies';
+    
+
     protected $fillable = [
-		'title',
-		'synopsis',
-		'poster',
-		'year',
+        'id',
+        'title',
+        'synopsis',
+        'poster',
+        'year',
         'available',
-		'genre_id'
-	];
+        'genre_id',
+    ];
+    
     public function genre()
-	{
-		return $this->belongsTo(Genre::class);
-	}
+{
+    return $this->belongsTo(Genre::class);
+}
+
 }
