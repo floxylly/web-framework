@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Movie;
+use App\Models\Genre;
 use Illuminate\Http\Request;
 
 class MovieController extends Controller
@@ -11,16 +13,17 @@ class MovieController extends Controller
      */
     public function index()
     {
-        $movies = Book::with('genre')->get();
-        return view('movies.index', compact('movies'));
+        $movie = Movie::with('genre')->get();
+        return view('movie.index', compact('movie'));
     }
+
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
         $genre = Genre::all();
-        return view('books.create', compact('genre'));
+        return view('movie.create', compact('genre'));
     }
 
     /**
@@ -30,18 +33,19 @@ class MovieController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'genre' => 'required|exists:genre,id',
-            'year' => 'required|integer|min:0',
+            'genre' => 'required|exists:genres,id',
+            'year' => 'required|integer|min:1900|max:' . date('Y'),
             'synopsis' => 'required|string|max:1000',
         ]);
+
         Movie::create([
             'title' => $validated['title'],
             'genre_id' => $validated['genre'], // Foreign key field
             'year' => $validated['year'],
             'synopsis' => $validated['synopsis'],
         ]);
-        return redirect()->route('movies.index')->with('success', 'movie has been successfully created!');
 
+        return redirect()->route('movies.index')->with('success', 'Movie has been successfully created!');
     }
 
     /**
